@@ -5,27 +5,17 @@ import {Route, Routes} from 'react-router-dom';
 import './App.css';
 
 import HomePage from "./pages/homepage/homepage.component";
+import {ShopPage} from "./pages/shop/shop.component";
 
-const HatsPage = (props) => {
-    console.log(props)
-    return (
-    <div>
-        <h1>HATS PAGE</h1>
-    </div>
-)}
-const HatsPageId = () => (
-    <div>
-        <h1>HATS PAGE IDDDDD</h1>
-    </div>
-)
+
+
 
 function App() {
   return (
     <div>
         <Routes>
         <Route path="/" element={<HomePage/>}/>
-        <Route path="/hats" element={<HatsPage/>}/>
-            <Route path="/hats/:hatsId" element={<HatsPageId/>}/>
+        <Route path="/shop" element={<ShopPage/>}/>
         </Routes>
     </div>
   );
