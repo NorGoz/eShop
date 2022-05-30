@@ -1,50 +1,23 @@
-import React from 'react';
-import {Route, Routes} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
+import {Home} from './routes/home/home.component';
+import Navigation from './routes/navigation/navigation.component';
+import Authentication from './routes/authentication/authentication.component';
 
-import './App.css';
+const Shop = () => {
+    return <h1>I am the shop page</h1>;
+};
 
-import HomePage from "./pages/homepage/homepage.component";
-import {ShopPage} from "./pages/shop/shop.component";
-import {Header} from "./components/header/header.component";
-import {SignInAndSignUpPage} from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import {auth} from "./firebase/firebase.utils";
-
-class App extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            currentUser: null
-        }
-    }
-
-    unsubscribeFromAuth = null;
-
-    componentDidMount() {
-       this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-            this.setState({currentUser: user});
-
-            console.log(user);
-        })
-    }
-
-    componentWillUnmount() {
-        this.unsubscribeFromAuth();
-    }
-
-    render() {
-        return (
-            <div>
-                <Header currentUser={this.currentUser}/>
-                <Routes>
-                    <Route path="/" element={<HomePage/>}/>
-                    <Route path="/shop" element={<ShopPage/>}/>
-                    <Route path='/signIn' element={<SignInAndSignUpPage/>}/>
-                </Routes>
-            </div>
-        );
-    }
-}
+const App = () => {
+    return (
+        <Routes>
+            <Route path='/' element={<Navigation />}>
+                <Route index element={<Home />} />
+                <Route path='shop' element={<Shop />} />
+                <Route path='auth' element={<Authentication />} />
+            </Route>
+        </Routes>
+    );
+};
 
 export default App;
